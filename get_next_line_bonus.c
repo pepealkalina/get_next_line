@@ -1,42 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: preina-g <preina-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:54:09 by preina-g          #+#    #+#             */
-/*   Updated: 2022/10/12 16:51:45 by preina-g         ###   ########.fr       */
+/*   Updated: 2022/10/12 16:51:23 by preina-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char *rd_line, char *buff)
+char	*ft_strjoin(char *left_str, char *buff)
 {
 	size_t	i;
 	size_t	j;
 	char	*str;
 
-	if (!rd_line)
+	if (!left_str)
 	{
-		rd_line = (char *)malloc(1 * sizeof(char));
-		rd_line[0] = '\0';
+		left_str = (char *)malloc(1 * sizeof(char));
+		left_str[0] = '\0';
 	}
-	if (!rd_line || !buff)
+	if (!left_str || !buff)
 		return (NULL);
-	str = malloc(sizeof(char) * ((ft_strlen(rd_line) + ft_strlen(buff)) + 1));
+	str = malloc(sizeof(char) * ((ft_strlen(left_str) + ft_strlen(buff)) + 1));
 	if (str == NULL)
 		return (NULL);
 	i = -1;
 	j = 0;
-	if (rd_line)
-		while (rd_line[++i] != '\0')
-			str[i] = rd_line[i];
+	if (left_str)
+		while (left_str[++i] != '\0')
+			str[i] = left_str[i];
 	while (buff[j] != '\0')
 		str[i++] = buff[j++];
-	str[ft_strlen(rd_line) + ft_strlen(buff)] = '\0';
-	free(rd_line);
+	str[ft_strlen(left_str) + ft_strlen(buff)] = '\0';
+	free(left_str);
 	return (str);
 }
 
@@ -54,6 +54,7 @@ char	*ft_read_line(int fd, char *file_rd)
 		rd_bytes = read(fd, str, BUFFER_SIZE);
 		if (rd_bytes == -1)
 		{
+			free(file_rd);
 			free(str);
 			return (NULL);
 		}
